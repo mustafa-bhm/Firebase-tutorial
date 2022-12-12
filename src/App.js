@@ -4,6 +4,7 @@ import AddBook from "./components/AddBook";
 import BooksList from "./components/BooksList";
 
 function App() {
+  // console.log(process.env.REACT_APP_authDomain);
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark" className="header">
