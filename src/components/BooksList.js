@@ -27,45 +27,27 @@ function BooksList({ getBookId }) {
         </Button>
       </div>
 
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Book Title</th>
-            <th>Book Author</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookList.map((book, index) => {
-            return (
-              <tr key={book.id}>
-                <td>{book.index}</td>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.status}</td>
-                <td>
-                  <Button
-                    variant="secondary"
-                    className="edit"
-                    onClick={(e) => getBookId(book.id)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    variant="danger"
-                    className="delete"
-                    onClick={(e) => deleteHandler(book.id)}
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <div className="booksContainer">
+        {bookList.map((book, index) => {
+          return (
+            <div className="bookCard">
+              <img src={book.cover} className="book-cover" alt="book-cover" />
+              <p>Title: {book.title}</p>
+              <p>Author: {book.author}</p>
+              <p>Status: {book.status}</p>
+              <div className="btns">
+                <div className="edit" onClick={(e) => getBookId(book.id)}>
+                  Edit
+                </div>
+
+                <div className="delete" onClick={(e) => deleteHandler(book.id)}>
+                  Delete
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

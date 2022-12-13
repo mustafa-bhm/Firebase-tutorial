@@ -16,18 +16,18 @@ function App() {
           <Navbar.Brand href="#home"> Library with Firebase</Navbar.Brand>
         </Container>
       </Navbar>
-      <Container style={{ width: "600px" }}>
+      {/* <Container style={{ width: "800px" }}>
         <Row>
-          <Col>
-            <AddBook id={bookId} setBookId={setBookId} />
-          </Col>
+          <Col> */}
+      <AddBook id={bookId} setBookId={setBookId} />
+      {/* </Col>
+        </Row> */}
+      {/* <Row>
+          <Col> */}
+      <BooksList getBookId={getBookIdHandler} />
+      {/* </Col>
         </Row>
-        <Row>
-          <Col>
-            <BooksList getBookId={getBookIdHandler} />
-          </Col>
-        </Row>
-      </Container>
+      </Container> */}
     </div>
   );
 }

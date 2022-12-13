@@ -6,9 +6,10 @@ import BookDataService from "../services/book.services";
 function AddBook({ id, setBookId }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [status, setStatus] = useState("Available");
+  const [status, setStatus] = useState("Read");
   const [flag, setFlag] = useState(true);
   const [message, setMessage] = useState({ error: false, msg: "" });
+  const [cover, setCover] = useState("");
 
   const handlSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ function AddBook({ id, setBookId }) {
       title: title,
       author: author,
       status: status,
+      cover: cover,
     };
 
     // adding the new book to firbase collection
@@ -42,6 +44,7 @@ function AddBook({ id, setBookId }) {
 
     setAuthor("");
     setTitle("");
+    setCover("");
   };
 
   // to edit book
@@ -53,6 +56,7 @@ function AddBook({ id, setBookId }) {
       setTitle(bookSnap.data().title);
       setAuthor(bookSnap.data().author);
       setStatus(bookSnap.data().status);
+      setCover(bookSnap.data().cover);
     } catch (err) {
       setMessage({ error: true, msg: err.message });
     }
@@ -80,7 +84,7 @@ function AddBook({ id, setBookId }) {
         <Form onSubmit={handlSubmit}>
           <Form.Group className="mb-3" controlId="formBookTitle">
             <InputGroup>
-              <InputGroup.Text id="formBookTitle">B</InputGroup.Text>
+              {/* <InputGroup.Text id="formBookTitle"></InputGroup.Text> */}
               <Form.Control
                 type="text"
                 placeholder="Book Title"
@@ -92,7 +96,7 @@ function AddBook({ id, setBookId }) {
 
           <Form.Group className="mb-3" controlId="formBookAuthor">
             <InputGroup>
-              <InputGroup.Text id="formBookAuthor">A</InputGroup.Text>
+              {/* <InputGroup.Text id="formBookAuthor">A</InputGroup.Text> */}
               <Form.Control
                 type="text"
                 placeholder="Book Author"
@@ -101,28 +105,38 @@ function AddBook({ id, setBookId }) {
               />
             </InputGroup>
           </Form.Group>
-          <ButtonGroup aria-label="Basic example" className="mb-3">
-            <Button
-              disabled={flag}
-              variant="success"
+          <Form.Group className="mb-3" controlId="formBookAuthor">
+            <InputGroup>
+              {/* <InputGroup.Text id="formBookCover">C</InputGroup.Text> */}
+              <Form.Control
+                type="text"
+                placeholder="Book cover link"
+                value={cover}
+                onChange={(e) => setCover(e.target.value)}
+              />
+            </InputGroup>
+          </Form.Group>
+          <Form.Select className="mb-3" aria-label="Default select example">
+            <option>Have you read this book ? </option>
+            <option
+              value="1"
               onClick={(e) => {
-                setStatus("Available");
-                setFlag(true);
+                setStatus("Read");
               }}
             >
-              Available
-            </Button>
-            <Button
-              variant="danger"
-              disabled={!flag}
+              No
+            </option>
+            <option
+              value="2"
               onClick={(e) => {
-                setStatus("Not Available");
-                setFlag(false);
+                setStatus("Not Read");
               }}
             >
-              Not Available
-            </Button>
-          </ButtonGroup>
+              {" "}
+              Yes
+            </option>
+          </Form.Select>
+
           <div className="d-grid gap-2">
             <Button variant="primary" type="Submit">
               Add/ Update
