@@ -1,11 +1,11 @@
 # My-Library
 
-A full-stack web app that allows users to add, update and delete their favorite books
+A full-stack web app that allows users to add, update and delete their favorite books using Firebase.
 
 ## Teck Stack:
 
 - Front-end: React , Bootstrap
-- Back-end : Firsebase
+- Back-end : Firebase
 
 ## Live Demo
 
