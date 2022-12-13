@@ -20,7 +20,7 @@ function BooksList({ getBookId }) {
   };
   return (
     <div>
-      <div className="mb-2">
+      <div className="mb-2 refresh">
         <Button variant="dark edit" onClick={getBooks}>
           Refresh List
         </Button>
