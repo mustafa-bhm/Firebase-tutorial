@@ -3,6 +3,7 @@ import { Container, Navbar, Row, Col } from "react-bootstrap";
 import AddBook from "./components/AddBook";
 import BooksList from "./components/BooksList";
 import { useState } from "react";
+import Footer from "./components/Footer";
 
 function App() {
   const [bookId, setBookId] = useState("");
@@ -28,6 +29,7 @@ function App() {
       {/* </Col>
         </Row>
       </Container> */}
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import BookDataService from "../services/book.services";
 
 function BooksList({ getBookId }) {
@@ -12,7 +12,6 @@ function BooksList({ getBookId }) {
   const getBooks = async () => {
     const data = await BookDataService.getAllBokks();
     setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    console.log("===", bookList);
   };
 
   const deleteHandler = async (id) => {
@@ -30,7 +29,7 @@ function BooksList({ getBookId }) {
       <div className="booksContainer">
         {bookList.map((book, index) => {
           return (
-            <div className="bookCard">
+            <div className="bookCard" key={book.id}>
               <img src={book.cover} className="book-cover" alt="book-cover" />
               <p>Title: {book.title}</p>
               <p>Author: {book.author}</p>

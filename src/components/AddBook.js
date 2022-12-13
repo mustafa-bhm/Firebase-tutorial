@@ -6,7 +6,7 @@ import BookDataService from "../services/book.services";
 function AddBook({ id, setBookId }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [status, setStatus] = useState("Read");
+  const [status, setStatus] = useState("");
   const [flag, setFlag] = useState(true);
   const [message, setMessage] = useState({ error: false, msg: "" });
   const [cover, setCover] = useState("");
@@ -45,6 +45,7 @@ function AddBook({ id, setBookId }) {
     setAuthor("");
     setTitle("");
     setCover("");
+    setStatus("");
   };
 
   // to edit book
@@ -84,7 +85,6 @@ function AddBook({ id, setBookId }) {
         <Form onSubmit={handlSubmit}>
           <Form.Group className="mb-3" controlId="formBookTitle">
             <InputGroup>
-              {/* <InputGroup.Text id="formBookTitle"></InputGroup.Text> */}
               <Form.Control
                 type="text"
                 placeholder="Book Title"
@@ -96,7 +96,6 @@ function AddBook({ id, setBookId }) {
 
           <Form.Group className="mb-3" controlId="formBookAuthor">
             <InputGroup>
-              {/* <InputGroup.Text id="formBookAuthor">A</InputGroup.Text> */}
               <Form.Control
                 type="text"
                 placeholder="Book Author"
@@ -107,7 +106,6 @@ function AddBook({ id, setBookId }) {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBookAuthor">
             <InputGroup>
-              {/* <InputGroup.Text id="formBookCover">C</InputGroup.Text> */}
               <Form.Control
                 type="text"
                 placeholder="Book cover link"
@@ -116,26 +114,16 @@ function AddBook({ id, setBookId }) {
               />
             </InputGroup>
           </Form.Group>
-          <Form.Select className="mb-3" aria-label="Default select example">
-            <option>Have you read this book ? </option>
-            <option
-              value="1"
-              onClick={(e) => {
-                setStatus("Read");
-              }}
-            >
-              No
-            </option>
-            <option
-              value="2"
-              onClick={(e) => {
-                setStatus("Not Read");
-              }}
-            >
-              {" "}
-              Yes
-            </option>
-          </Form.Select>
+          <Form.Group className="mb-3" controlId="formBookStatus">
+            <InputGroup>
+              <Form.Control
+                type="text"
+                placeholder="Have you read this book (Yes/No)"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              />
+            </InputGroup>
+          </Form.Group>
 
           <div className="d-grid gap-2">
             <Button variant="primary" type="Submit">
