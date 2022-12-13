@@ -2,9 +2,13 @@ import "./App.css";
 import { Container, Navbar, Row, Col } from "react-bootstrap";
 import AddBook from "./components/AddBook";
 import BooksList from "./components/BooksList";
+import { useState } from "react";
 
 function App() {
-  // console.log(process.env.REACT_APP_authDomain);
+  const [bookId, setBookId] = useState("");
+  const getBookIdHandler = (id) => {
+    setBookId(id);
+  };
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark" className="header">
@@ -15,12 +19,12 @@ function App() {
       <Container style={{ width: "600px" }}>
         <Row>
           <Col>
-            <AddBook />
+            <AddBook id={bookId} setBookId={setBookId} />
           </Col>
         </Row>
         <Row>
           <Col>
-            <BooksList />
+            <BooksList getBookId={getBookIdHandler} />
           </Col>
         </Row>
       </Container>

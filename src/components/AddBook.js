@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { async } from "@firebase/util";
+import React, { useState, useEffect } from "react";
 import { Form, InputGroup, Button, ButtonGroup, Alert } from "react-bootstrap";
 import BookDataService from "../services/book.services";
 
-function AddBook() {
+function AddBook({ id, setBookId }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [status, setStatus] = useState("Available");
@@ -24,8 +25,17 @@ function AddBook() {
 
     // adding the new book to firbase collection
     try {
-      await BookDataService.addBooks(newBook);
-      setMessage({ error: false, msg: "new book has been added" });
+      // to check if adding new book or updating existing one if id exists;
+      if (id !== undefined && id !== "") {
+        // update book
+        await BookDataService.updateBook(id, newBook);
+        setBookId = "";
+        setMessage({ error: false, msg: " book has been updated !" });
+      } else {
+        // create new book
+        await BookDataService.addBooks(newBook);
+        setMessage({ error: false, msg: "new book has been added" });
+      }
     } catch (err) {
       setMessage({ error: true, msg: err.message });
     }
@@ -33,6 +43,27 @@ function AddBook() {
     setAuthor("");
     setTitle("");
   };
+
+  // to edit book
+  // => to fetch data for particular book
+  const editHandler = async () => {
+    setMessage("");
+    try {
+      const bookSnap = await BookDataService.getBook(id);
+      setTitle(bookSnap.data().title);
+      setAuthor(bookSnap.data().author);
+      setStatus(bookSnap.data().status);
+    } catch (err) {
+      setMessage({ error: true, msg: err.message });
+    }
+  };
+
+  useEffect(() => {
+    console.log("to edit ", id);
+    if (id !== undefined && id !== "") {
+      editHandler();
+    }
+  }, [id]);
 
   return (
     <>

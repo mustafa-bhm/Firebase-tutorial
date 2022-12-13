@@ -15,7 +15,7 @@ class BookDataService {
   addBooks = (newBook) => {
     return addDoc(bookCollectionRef, newBook);
   };
-  updateBooks = (id, updatedBook) => {
+  updateBook = (id, updatedBook) => {
     // to check if the book already exist in our collection
     const bookDoc = doc(db, "books", id);
     // update the book
