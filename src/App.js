@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Navbar bg="dark" variant="dark" className="header">
         <Container>
-          <Navbar.Brand href="#home"> Library with Firebase</Navbar.Brand>
+          <h1> Library with Firebase</h1>
         </Container>
       </Navbar>
       {/* <Container style={{ width: "800px" }}>

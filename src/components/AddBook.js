@@ -1,6 +1,6 @@
 import { async } from "@firebase/util";
 import React, { useState, useEffect } from "react";
-import { Form, InputGroup, Button, ButtonGroup, Alert } from "react-bootstrap";
+import { Form, InputGroup, Button, Alert } from "react-bootstrap";
 import BookDataService from "../services/book.services";
 
 function AddBook({ id, setBookId }) {
@@ -64,7 +64,6 @@ function AddBook({ id, setBookId }) {
   };
 
   useEffect(() => {
-    console.log("to edit ", id);
     if (id !== undefined && id !== "") {
       editHandler();
     }
@@ -72,7 +71,7 @@ function AddBook({ id, setBookId }) {
 
   return (
     <>
-      <div className="p-4 box">
+      <div className="p-4 inputs">
         {message?.msg && (
           <Alert
             variant={message?.error ? "danger" : "success"}
@@ -83,7 +82,7 @@ function AddBook({ id, setBookId }) {
           </Alert>
         )}
         <Form onSubmit={handlSubmit}>
-          <Form.Group className="mb-3" controlId="formBookTitle">
+          <Form.Group className="mb-3 " controlId="formBookTitle">
             <InputGroup>
               <Form.Control
                 type="text"
